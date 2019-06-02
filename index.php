@@ -13,8 +13,8 @@
     	<div class="authPage">
 	    	<form name="auth" action="" method="POST">
 		    	<h2>Вход для зарегистрированных пользователей</h2>
-			    <input class="standardInput" type="text" name="login" placeholder="Имя пользователя"> <br><br>
-			    <input class="standardInput" type="password" name="password" placeholder="Пароль"> <br><br>
+			    <input class="standardInput" type="text" name="login" placeholder="Имя пользователя" required> <br><br>
+			    <input class="standardInput" type="password" name="password" placeholder="Пароль" required> <br><br>
 			    <input class="standardButton" type="submit" name="auth" value="ВОЙТИ">
 		    </form>
 			<b><a href="https://vk.com/george99" target="_blank">Разработчик Семёнов Георгий</a></b><br>

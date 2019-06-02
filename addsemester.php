@@ -32,8 +32,12 @@
                 $user = 'root';
                 $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
                 mysqli_query($connection,"SET NAMES utf8");
-                $start_date = $_POST["start_date"];
-                $end_date = $_POST['end_date'];
+                // $start_date = $_POST["start_date"];
+                // $end_date = $_POST['end_date'];
+                $start_date = strtotime($_POST['start_date']);
+                $start_date = date('d-m-Y', $start_date);
+                $end_date = strtotime($_POST['end_date']);
+                $end_date = date('d-m-Y', $end_date);
                 if ($start_date == $end_date)
                 {
                     echo('<script>alert("Поля даты не должны совпадать")</script>');
@@ -57,6 +61,7 @@
                 $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
                 echo('<script>alert("Семестр добавлен")</script>');
                 }
+                echo $start_date;
             }
         ?>
             </table>

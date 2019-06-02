@@ -32,12 +32,13 @@
             </tbody>
         <?php
             get_semester();
+            del_semester();
         ?>
             </table>
         </form>
     </main>
     <div class = 'journal'>
-                <img class = "main_journal" src="src/diary_background.png" alt="jrl">
-            </div>
+        <img class = "main_journal" src="src/diary_background.png" alt="jrl">
+    </div>
 </body>
 </html>
