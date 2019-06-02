@@ -172,12 +172,11 @@ function show_groups()
     $user = 'root';
     $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
     mysqli_query($connection,"SET NAMES utf8");
-    $query = "SELECT DISTINCT `grp_name` FROM `students`";
+    $query = "SELECT DISTINCT `grp_name` FROM `groups`";
     $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
     while($res = mysqli_fetch_assoc($result))
     {
         $array[] = $res; 
-
     }
     echo('<select class = "grp_list_class" name = "grp_list">');
     for ($i = 0; $i < count($array); $i++)
@@ -212,27 +211,53 @@ function show_students()
         {
             $array[] = $res;
         }
-        echo '<table class = "student_table" border="1"><tbody>
-            <tr>
-                <th>Номер студ. билета</th>
-                <th>ФИО</th>
-                <th>Группа</th>
-                <th></th>
-            </tr>					
-            </tbody>';
-        for ($i = 0; $i < count($array); $i++)
+        if(!empty($array))
         {
-            echo '<tr>'.'<td>'.$array[$i]['u_id'].'</td>'.'<td>'.$array[$i]['name'].'</td>'.'<td>'.$array[$i]['grp_name'].'</td>'.'<td>'.'<input class="editButton" type="submit" name="edit" value="'.'Редактировать'.'">'.'</td>'.'<td>'.'<input class="editButton" type="submit" name="edit" value="'.'Удалить'.'">'.'</tr>';
-        }
-        echo("</table");
-        
-        echo '<div class = "page_num_div">';
+            echo '<table class = "student_table" border="1"><tbody>
+                <tr>
+                    <th>Номер студ. билета</th>
+                    <th>ФИО</th>
+                    <th>Группа</th>
+                    <th></th>
+                    <th></th>
+                </tr>					
+                </tbody>';
+            for ($i = 0; $i < count($array); $i++)
+            {                                                                                                                                                                                                                            
+                echo '<tr>'.'<td>'.$array[$i]['u_id'].'</td>'.'<td>'.$array[$i]['name'].'</td>'.'<td>'.$array[$i]['grp_name'].'</td>'.'<td>'.'<a class="editButton" href="editstd.php" name="edit'.$i.'">'.'Редактировать</a>'.'</td>'.'<td>'.'<a class="delButton" href="delstd.php" name="edit'.$i.'">'.'Удалить'.'</a>'.'</tr>';
+            }
+            echo("</table");
+            
+            echo '<div class = "page_num_div">';
 
-        for($i = 1; $i <= $pagesCount; $i++)
-        {
-            echo '<a class = "num" href="groups.php?id='.$i.'" wspace="14">'.$i.'</a>'.str_repeat('&nbsp;', 1);
+            for($i = 1; $i <= $pagesCount; $i++)
+            {
+                echo '<a class = "num" href="groups.php?id='.$i.'" wspace="14">'.$i.'</a>'.str_repeat('&nbsp;', 1);
+            }
+            echo '</div>';
         }
-        echo '</div>';
+        else
+        {
+            echo('<div class = num>');
+            echo('<p>В данной группе пока нет студентов</p>');
+            echo('</div>');
+        }
+    }
+}
+
+function addnewgrp()
+{
+    if(isset($_POST['get_grp']))
+    {
+        $host = 'localhost';
+        $database = 'test';
+        $user = 'root';
+        $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
+        mysqli_query($connection,"SET NAMES utf8");
+        $query = "INSERT INTO `groups` (`grp_id`, `grp_name`) VALUES (NULL, '{$_POST['get_grp']}')";
+        echo($query);
+        $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+        echo("<script>alert(Группа успешна добавлена)</script>");
     }
 }
 ?>     

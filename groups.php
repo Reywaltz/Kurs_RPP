@@ -36,10 +36,9 @@
             </div>';
                 show_groups();
                 echo'<input class="showButton" type="submit" name = "get_std" value="Получить список студентов"><br>';
+                echo'<a class="addButton" href = "addnewgrp.php">Добавить новую группу</a>';
                 show_students();
                 echo '</form>';
-           
-       
             }
     ?>
 </body>
