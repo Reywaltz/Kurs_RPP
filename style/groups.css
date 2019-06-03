@@ -113,8 +113,8 @@ h2{
 
 .showButton {
     position: absolute;
-    top: 255px;
-    left: 490px;
+    top: -60px;
+    left: 13px;
     font-family: 'Lora', serif;
     width: 250px;
     background-color: #3498DB;
@@ -231,6 +231,7 @@ a.num{
 {
     position: absolute;
     left: 1145px;
+    bottom: 700px;
     width: 250px;
 }
 

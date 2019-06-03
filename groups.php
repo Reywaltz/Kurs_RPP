@@ -15,31 +15,25 @@
         log_out();
     ?>     
     <main class="main">	
-		<form name="std_list" method="post">
+		<form name="grp_list" method="post">
             <?php
-            if(!isset($_GET['id']))
             {
-                echo '<div>';
-                show_groups();
-                echo'</div>
+                echo '
+                
                     <input class="showButton" type="submit" name = "get_std" value="Получить список студентов"><br>
-                </form>
             </main>
             <div class = "journal">
                 <img class = "main_journal" src="src/diary_background.png" alt="jrl" width="1295px">
             </div>';
-            }
-            else
-            { 
-                echo '</main><div class = "journal">
-                <img class = "main_journal" src="src/diary_background.png" alt="jrl" width="1295px">
-            </div>';
                 show_groups();
-                echo'<input class="showButton" type="submit" name = "get_std" value="Получить список студентов"><br>';
                 echo'<a class="addButton" href = "addnewgrp.php">Добавить новую группу</a>';
-                show_students();
                 echo '</form>';
+                echo '<form name="std_list" method="post">';
+                show_students();
+                // editstd();
+                echo '</form></div>';
             }
+            ?>
     ?>
 </body>
 </html>
