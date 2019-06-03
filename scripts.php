@@ -78,11 +78,12 @@ function get_main_page()
                     <a href="\admin/marks/chooseGroupAndSubject.php">Оценки</a>
                 </div>
                 <div class="welcome">
-                    <p>Личный кабинет: '; echo("Администратор"); echo('<img src ="'.$res['img'].'"width="100" height="100">');
+                    <p>Личный кабинет: '; echo("Администратор"); 
                     echo '<form class="exit_b" action="" method="POST">
                         <input class="standardButton" type="submit" name="exit" value="ВЫЙТИ">
                     </form>
-                </div></div>';
+                </div>
+            </div>';
     }
     elseif($res['role'] == 'teacher')
     {
@@ -179,6 +180,7 @@ function show_groups()
         $array[] = $res; 
     }
     echo('<select class = "grp_list_class" name = "grp_list">');
+    print_r($array);
     for ($i = 0; $i < count($array); $i++)
     {
         echo '<option value = "'.$array[$i]['grp_name'].'">'.$array[$i]['grp_name'].'</option>';
@@ -196,21 +198,22 @@ function show_students()
         $user = 'root';
         $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
         mysqli_query($connection,"SET NAMES utf8");
-
         $page = $_GET['id'];
         $notesOnPage = 2;
         $from = ($page - 1) * $notesOnPage;
-
         $query = "SELECT * FROM `students` WHERE `grp_name`= '{$_POST['grp_list']}' LIMIT $from, $notesOnPage";
         $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
         $query1 = "SELECT COUNT(*) as count FROM students WHERE `grp_name` = '{$_POST['grp_list']}'";
         $result1 = mysqli_query($connection, $query1) or die(mysqli_error($connection));
+        print_r($_POST);
         $count = (int)mysqli_fetch_assoc($result1)['count'];
         $pagesCount = ceil($count/$notesOnPage);
         while($res = mysqli_fetch_assoc($result))
         {
             $array[] = $res;
         }
+        print_r($array);
+
         if(!empty($array))
         {
             echo '<table class = "student_table" border="1"><tbody>
@@ -218,13 +221,12 @@ function show_students()
                     <th>Номер студ. билета</th>
                     <th>ФИО</th>
                     <th>Группа</th>
-                    <th></th>
-                    <th></th>
+
                 </tr>					
                 </tbody>';
             for ($i = 0; $i < count($array); $i++)
             {                                                                                                                                                                                                                            
-                echo '<tr>'.'<td>'.$array[$i]['u_id'].'</td>'.'<td>'.$array[$i]['name'].'</td>'.'<td>'.$array[$i]['grp_name'].'</td>'.'<td>'.'<a class="editButton" href="editstd.php" name="edit'.$i.'">'.'Редактировать</a>'.'</td>'.'<td>'.'<a class="delButton" href="delstd.php" name="edit'.$i.'">'.'Удалить'.'</a>'.'</tr>';
+                echo '<tr>'.'<td>'.$array[$i]['u_id'].'</td>'.'<td>'.$array[$i]['name'].'</td>'.'<td>'.$array[$i]['grp_name'].'</td>';
             }
             echo("</table");
             
@@ -259,5 +261,10 @@ function addnewgrp()
         $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
         echo("<script>alert(Группа успешна добавлена)</script>");
     }
+}
+
+function editstd()
+{
+    print_r($_POST);
 }
 ?>     

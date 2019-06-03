@@ -104,7 +104,7 @@ h2{
 .grp_list_class{
     position: absolute;
     left: 520px;
-    top: 280px;
+    top: 200px;
     font-family: 'Lora', serif;
     z-index: 2;
     border-radius: 10px;
@@ -113,7 +113,7 @@ h2{
 
 .showButton {
     position: absolute;
-    top: 335px;
+    top: 255px;
     left: 490px;
     font-family: 'Lora', serif;
     width: 250px;
@@ -138,6 +138,9 @@ h2{
 
 .editButton {
     font-family: 'Lora', serif;
+    position: absolute;
+    left: 400px;
+    top: 530px;
     width: 150px;
     background-color: #3498DB;
     color: white;
@@ -157,6 +160,9 @@ h2{
 .delButton
 {
     font-family: 'Lora', serif;
+    position: absolute;
+    left: 580px;
+    top: 530px;
     width: 150px;
     background-color: #3498DB;
     color: white;
@@ -177,7 +183,7 @@ h2{
 .addButton {
     position: absolute;
     left: 490px;
-    bottom: 520px;
+    bottom: 600px;
     font-family: 'Lora', serif;
     width: 218px;
     background-color: #3498DB;
@@ -199,11 +205,12 @@ h2{
 .student_table{
     position: absolute;
     left: 1000px;
+    top: 220px;
     font-family: 'Lora', serif;
     text-align: center;
     border-collapse: collapse;
     table-layout: auto;
-    width: 150px;
+    width: 540px;
 }
 
 .page_num{
@@ -225,4 +232,19 @@ a.num{
     position: absolute;
     left: 1145px;
     width: 250px;
+}
+
+.page_num_div
+{
+    position: absolute;
+    left: 400px;
+}
+
+.std_div_class
+{
+    position: absolute;
+    z-index: 3;
+    left: 20%;
+    font-size: 20px;
+    bottom: 470px;
 }
