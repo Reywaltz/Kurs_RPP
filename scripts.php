@@ -232,6 +232,8 @@ function show_students()
     }
 }
 
+
+
 function addnewgrp()
 {
     if(isset($_POST['get_grp']))
@@ -334,5 +336,73 @@ function addus()
             echo '<script>alert("Запись с таким логином уже существует");</script>';
         }
     }
+}
+
+function delus()
+{
+    if(isset($_POST['delus_but']))
+    {
+        $host = 'localhost';
+        $database = 'test';
+        $user = 'root';
+        $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
+        mysqli_query($connection,"SET NAMES utf8");
+        $query = "SELECT * FROM `users`";
+        $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+        while($res = mysqli_fetch_assoc($result))
+        {
+            $array[] = $res;
+        }
+        if(empty($array))
+        {
+            echo '<script>alert("В базе нет пользователей");</script>';
+        }
+        else
+        {
+            print_r($array);
+        }
+    }
+}
+
+function show_us()
+{
+    $host = 'localhost';
+    $database = 'test';
+    $user = 'root';
+    $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
+    mysqli_query($connection,"SET NAMES utf8");
+    $query = "SELECT * FROM `users`";
+    $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+    // print_r($_POST);
+    while($res = mysqli_fetch_assoc($result))
+    {
+        $array[] = $res;
+    }
+
+    if(!empty($array))
+    {
+        // print_r($array); 
+
+        echo '<table class = "student_table" border="1"><tbody>
+            <tr>
+                <th>ID</th>
+                <th>Логин</th>
+                <th>Пароль</th>
+                <th>Роль</th>
+            </tr>					
+            </tbody>';
+        for ($i = 0; $i < count($array); $i++)
+        {                                                                                                                                                                                                                            
+            echo '<tr>'.'<td>'.$array[$i]['id'].'</td>'.'<td>'.$array[$i]['login'].'</td>'.'<td>'.$array[$i]['password'].'</td>'.'<td>'.$array[$i]['role'].'</td>';
+        }
+        echo("</table");
+    }
+    else
+    {
+        echo('<div class = num>');
+        echo('<p>В данной группе пока нет студентов</p>');
+        echo('</div>');
+    }
+
 }
 ?>     

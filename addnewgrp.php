@@ -30,7 +30,6 @@
             echo '<input class = "edit_input" name = "edit_text1" type = "text">';
             echo '<input class = "del_Button" name = "del_but" type = "submit" value = "Удалить группу">';
             editgrp();
-            // delgrp();
             echo'</form>';
             echo '</main>
             <div class = "journal">

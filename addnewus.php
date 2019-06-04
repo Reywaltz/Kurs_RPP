@@ -23,11 +23,14 @@
                 echo '<img class = "main_journal" src="src/diary_background.png" alt="jrl" width="1295px">';
                 echo '</div>';
                 echo '<div class = "inp_fields">';
-                echo '<input class="log_text" placeholder="Логин" name = "log_text1" type="text"><br><br>';
-                echo '<input class="pass_text" placeholder="Пароль" name = "pass_text1" type="password"><br><br>';
+                echo '<input class="log_text" placeholder="Логин" name = "log_text1" type="text" required><br><br>';
+                echo '<input class="pass_text" placeholder="Пароль" name = "pass_text1" type="password" required><br><br>';
                 echo '<select class="role_text" name = "role_text1"><option value = "Администратор">Администратор</option><option value = "Преподаватель">Преподаватель</option><option value = "Студент">Студент</option></select><br><br>';
                 echo '<input class="adduser" type = "submit" name = "add_user1" value = "Добавить пользователя">';
+                echo '<input class = "delus_Button" name = "delus_but" type = "submit" value = "Удалить учётную запись">';
                 addus();
+                delus();
+                show_us();
                 echo'</div>';
                 echo '</form>';
             }
