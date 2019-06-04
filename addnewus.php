@@ -27,11 +27,14 @@
                 echo '<input class="pass_text" placeholder="Пароль" name = "pass_text1" type="password" required><br><br>';
                 echo '<select class="role_text" name = "role_text1"><option value = "Администратор">Администратор</option><option value = "Преподаватель">Преподаватель</option><option value = "Студент">Студент</option></select><br><br>';
                 echo '<input class="adduser" type = "submit" name = "add_user1" value = "Добавить пользователя">';
-                echo '<input class = "delus_Button" name = "delus_but" type = "submit" value = "Удалить учётную запись">';
-                addus();
-                delus();
-                show_us();
                 echo'</div>';
+                echo '</form>';
+                echo '<form name="id_text" method="post">';
+                echo '<input class = "delus_Button" name = "delus_but" type = "submit" value = "Удалить учётную запись c данным id">';
+                addus();
+                show_us_list();
+                show_us();
+                delus();
                 echo '</form>';
             }
             ?>

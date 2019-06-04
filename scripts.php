@@ -73,7 +73,7 @@ function get_main_page()
                     <a href="semester.php">Семестры</a>
                     <a href="groups.php">Группы</a>
                     <a href="actionWithTeachers.php">Преподаватели</a>
-                    <a href="\admin/subjects/allSubjects.php">Предметы</a>
+                    <a href="subject.php">Предметы</a>
                     <a href="\admin/students/chooseBranch.php">Студенты</a>
                     <a href="\admin/marks/chooseGroupAndSubject.php">Оценки</a>
                 </div>
@@ -232,8 +232,6 @@ function show_students()
     }
 }
 
-
-
 function addnewgrp()
 {
     if(isset($_POST['get_grp']))
@@ -288,7 +286,7 @@ function editgrp()
             echo '<script>alert("Группа успешно изменена");</script>'; 
             show_groups();
         }
-    else
+        else
         {
             echo '<script>alert("Введите новое значение группы");</script>';
         }
@@ -347,20 +345,10 @@ function delus()
         $user = 'root';
         $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
         mysqli_query($connection,"SET NAMES utf8");
-        $query = "SELECT * FROM `users`";
+        $query = "DELETE FROM `users` WHERE `id` = '{$_POST['id_text1']}'";
+        echo($query);
         $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
-        while($res = mysqli_fetch_assoc($result))
-        {
-            $array[] = $res;
-        }
-        if(empty($array))
-        {
-            echo '<script>alert("В базе нет пользователей");</script>';
-        }
-        else
-        {
-            print_r($array);
-        }
+        header('Location: addnewus.php');
     }
 }
 
@@ -378,7 +366,6 @@ function show_us()
     {
         $array[] = $res;
     }
-
     if(!empty($array))
     {
         // print_r($array); 
@@ -394,6 +381,7 @@ function show_us()
         for ($i = 0; $i < count($array); $i++)
         {                                                                                                                                                                                                                            
             echo '<tr>'.'<td>'.$array[$i]['id'].'</td>'.'<td>'.$array[$i]['login'].'</td>'.'<td>'.$array[$i]['password'].'</td>'.'<td>'.$array[$i]['role'].'</td>';
+            
         }
         echo("</table");
     }
@@ -403,6 +391,105 @@ function show_us()
         echo('<p>В данной группе пока нет студентов</p>');
         echo('</div>');
     }
+}
 
+function show_us_list()
+{
+    $host = 'localhost';
+    $database = 'test';
+    $user = 'root';
+    $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
+    mysqli_query($connection,"SET NAMES utf8");
+    $query = "SELECT * FROM `users`";
+    $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+    // print_r($_POST);
+    while($res = mysqli_fetch_assoc($result))
+    {
+        $array[] = $res;
+    }
+    // print_r($array);
+    if(!empty($array))
+    {
+        // print_r($array);		
+        echo '<select class="id_text" name = "id_text1">';
+        for ($i = 0; $i < count($array); $i++)
+        {                                                                                                                                                                                                                            
+            echo '<option value ="'.$array[$i]['id'].'">'.$array[$i]['id'].'</option>';
+        }
+        echo '</select>';
+    }
+    else
+    {
+        echo('<div class = num>');
+        echo('<p>В данной группе пока нет студентов</p>');
+        echo('</div>');
+    }
+}
+
+function addsubject()
+{
+    if(isset($_POST['add_subject1']))
+    {
+        $host = 'localhost';
+        $database = 'test';
+        $user = 'root';
+        $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
+        mysqli_query($connection,"SET NAMES utf8");
+        $query = "SELECT * FROM `subjects` WHERE `sub_name` = '{$_POST['sub_text1']}'";
+        $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+        while($res = mysqli_fetch_assoc($result))
+        {
+            $array[] = $res;
+        }
+        if(empty($array))
+        {
+            $query1 = "INSERT INTO `subjects`(`sub_id`, `sub_name`) VALUES ('NULL', '{$_POST['sub_text1']}')";
+            $result = mysqli_query($connection, $query1) or die(mysqli_error($connection));
+            echo '<script>alert("Предмет добавлен");</script>';
+        }
+        else
+        {
+            echo '<script>alert("Предмет с таким названием уже существует");</script>';
+        }
+    }
+}
+
+function show_subject()
+{
+    $host = 'localhost';
+    $database = 'test';
+    $user = 'root';
+    $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
+    mysqli_query($connection,"SET NAMES utf8");
+    $query = "SELECT * FROM `subjects` ORDER BY `subjects`.`sub_id` ASC";
+    $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+    // print_r($_POST);
+    while($res = mysqli_fetch_assoc($result))
+    {
+        $array[] = $res;
+    }
+    if(!empty($array))
+    {
+        // print_r($array); 
+
+        echo '<table class = "student_table" border="1"><tbody>
+            <tr>
+                <th>ID</th>
+                <th>Предмет</th>
+            </tr>					
+            </tbody>';
+        for ($i = 0; $i < count($array); $i++)
+        {                                                                                                                                                                                                                            
+            echo '<tr>'.'<td>'.$array[$i]['sub_id'].'</td>'.'<td>'.$array[$i]['sub_name'].'</td>';
+            
+        }
+        echo("</table");
+    }
+    else
+    {
+        echo('<div class = num>');
+        echo('<p>В данной группе пока нет предметов</p>');
+        echo('</div>');
+    }
 }
 ?>     
