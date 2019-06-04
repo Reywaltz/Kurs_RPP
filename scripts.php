@@ -305,7 +305,34 @@ function delgrp()
         $query1 = "DELETE FROM `groups` WHERE `grp_name` = '{$_POST['grp_list']}'";
         $result1 = mysqli_query($connection, $query1) or die(mysqli_error($connection));
         echo '<script>alert("Группа удалена");</script>'; 
-        
+    }
+}
+
+function addus()
+{
+    if(isset($_POST['add_user1']))
+    {
+        $host = 'localhost';
+        $database = 'test';
+        $user = 'root';
+        $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
+        mysqli_query($connection,"SET NAMES utf8");
+        $query = "SELECT * FROM `users` WHERE `login` = '{$_POST['log_text1']}'";
+        $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+        while($res = mysqli_fetch_assoc($result))
+        {
+            $array[] = $res;
+        }
+        if(empty($array))
+        {
+            $query1 = "INSERT INTO `users` (`id`, `login`, `password`, `role`) VALUES ('NULL', '{$_POST['log_text1']}', '{$_POST['pass_text1']}', '{$_POST['role_text1']}')";
+            $result = mysqli_query($connection, $query1) or die(mysqli_error($connection));
+            echo '<script>alert("Учётная запись добавлена");</script>';
+        }
+        else
+        {
+            echo '<script>alert("Запись с таким логином уже существует");</script>';
+        }
     }
 }
 ?>     
