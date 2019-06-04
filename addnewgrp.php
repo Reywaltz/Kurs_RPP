@@ -28,8 +28,10 @@
             echo '<input class="editButton" type = "submit" value = "Изменить группу">';
             echo '<h2 class = "edit_text">Выберите группу для редактирования</h2>';
             echo '<input class = "edit_input" name = "edit_text1" type = "text">';
+            echo '<input class = "del_Button" name = "del_but" type = "submit" value = "Удалить группу">';
             editgrp();
-            // print_r($_POST);
+            // delgrp();
+            echo'</form>';
             echo '</main>
             <div class = "journal">
                 <img class = "main_journal" src="src/diary_background.png" alt="jrl" width="1295px">

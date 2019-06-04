@@ -26,7 +26,7 @@
             </div>';
                 show_groups();
                 echo'<a class="addButton" href = "addnewgrp.php">Добавить новую/Удалить группу</a>';
-                echo'<a class="add_us_Button" href = "addnewgrp.php">Добавить новую/Удалить учётную запись</a>';
+                echo'<a class="add_us_Button" href = "addnewus.php">Добавить новую/Удалить учётную запись</a>';
                 echo '</form>';
                 echo '<form name="std_list" method="post">';
                 show_students();

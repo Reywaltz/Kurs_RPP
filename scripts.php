@@ -265,22 +265,47 @@ function editgrp()
 {
     if(isset($_POST['grp_list']))
     {
+        if($_POST['edit_text1'] != "")
+        {
+            $host = 'localhost';
+            $database = 'test';
+            $user = 'root';
+            $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
+            mysqli_query($connection,"SET NAMES utf8");
+            $query1 = "SELECT * FROM `groups` WHERE `grp_name` = '{$_POST['grp_list']}'";
+            $result1 = mysqli_query($connection, $query1) or die(mysqli_error($connection));
+            while($res = mysqli_fetch_assoc($result1))
+            {
+                $array[] = $res;
+            }
+            $grp_id = $array[0]['grp_id'];
+            $query = "UPDATE `groups` SET `grp_name` = '{$_POST['edit_text1']}' WHERE `groups`.`grp_id` = '$grp_id'";
+            // echo($query);
+            $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+            print_r($res = mysqli_fetch_assoc($result1));
+            echo '<script>alert("Группа успешно изменена");</script>'; 
+            show_groups();
+        }
+    else
+        {
+            echo '<script>alert("Введите новое значение группы");</script>';
+        }
+    }
+}
+
+function delgrp()
+{
+    if(isset($_POST['del_but']))
+    {
         $host = 'localhost';
         $database = 'test';
         $user = 'root';
         $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
         mysqli_query($connection,"SET NAMES utf8");
-        $query1 = "SELECT * FROM `groups` WHERE `grp_name` = '{$_POST['grp_list']}'";
+        $query1 = "DELETE FROM `groups` WHERE `grp_name` = '{$_POST['grp_list']}'";
         $result1 = mysqli_query($connection, $query1) or die(mysqli_error($connection));
-        while($res = mysqli_fetch_assoc($result1))
-        {
-            $array[] = $res;
-        }
-        $grp_id = $array[0]['grp_id'];
-        $query = "UPDATE `groups` SET `grp_name` = '{$_POST['edit_text1']}' WHERE `groups`.`grp_id` = '$grp_id'";
-        echo($query);
-        $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
-        echo '<script>alert("Группа успешно изменена");</script>'; 
+        echo '<script>alert("Группа удалена");</script>'; 
+        
     }
 }
 ?>     
