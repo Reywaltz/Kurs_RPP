@@ -25,15 +25,24 @@
                 echo '<h2>Напишите название нового предмета</h2>';
                 echo '<input class="sub_text" placeholder="Название предмета" name = "sub_text1" type="text" required><br><br>';
                 echo '<input class="add_subject" type = "submit" name = "add_subject1" value = "Добавить предмет" required>';
+                echo '<input class = "del_subject" name = "del_subject1" type = "submit" value = "Удалить предмет c данным id">';
                 echo'</div>';
+                // addsubject();
+                delsubjects();
                 echo '</form>';
-                addsubject();
+                echo '<form name="grp_text" method="post">';
+                getsubid();
+                echo '<input class = "edit_text" name = "edit_text1" type = "text">';
+                echo '<input class = "edit_subject" name = "edit_subject1" type = "submit" value = "Редактировать предметмет c данным id">';
+                
+                editsubject();
+                
                 show_subject();
-                echo '<form name="id_text" method="post">';
-                // show_us_list();
-                // show_us();
-                // delus();
+               
                 echo '</form>';
+                echo '</main>';
+                echo '<div class = "journal">';
+                
             }
             ?>
 </body>

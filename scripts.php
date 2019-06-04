@@ -492,4 +492,72 @@ function show_subject()
         echo('</div>');
     }
 }
+
+function delsubjects()
+{
+    if(isset($_POST['del_subject1']))
+    {
+        $host = 'localhost';
+        $database = 'test';
+        $user = 'root';
+        $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
+        mysqli_query($connection,"SET NAMES utf8");
+        $query = "DELETE FROM `subjects` WHERE `sub_name` = '{$_POST['sub_text1']}'";
+        $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+        header('Location: subject.php');
+    }
+}
+
+function getsubid()
+{
+    $host = 'localhost';
+    $database = 'test';
+    $user = 'root';
+    $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
+    mysqli_query($connection,"SET NAMES utf8");
+    $query1 = "SELECT * FROM `subjects` ORDER BY `sub_id` ASC";
+    $result1 = mysqli_query($connection, $query1) or die(mysqli_error($connection));
+    while($res = mysqli_fetch_assoc($result1))
+    {
+        $array[] = $res;
+    }
+    if(!empty($array))
+    {	
+        echo '<select class="subid_text" name = "subid_text1">';
+        for ($i = 0; $i < count($array); $i++)
+        {                                                                                                                                                                                                                            
+            echo '<option value ="'.$array[$i]['sub_id'].'">'.$array[$i]['sub_id'].'</option>';
+        }
+        echo '</select>';
+    }
+}
+
+function editsubject()
+{
+    if(isset($_POST['edit_subject1']))
+    {
+        if($_POST['edit_text1'] != "")
+        {
+            $host = 'localhost';
+            $database = 'test';
+            $user = 'root';
+            $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
+            mysqli_query($connection,"SET NAMES utf8");
+            $query1 = "SELECT * FROM `subjects` WHERE `sub_name` = '{$_POST['subid_text1']}'";
+            $result1 = mysqli_query($connection, $query1) or die(mysqli_error($connection));
+            while($res = mysqli_fetch_assoc($result1))
+            {
+                $array[] = $res;
+            }
+            $query = "UPDATE `subjects` SET `sub_name` = '{$_POST['edit_text1']}' WHERE `sub_id` = '{$_POST['subid_text1']}'";
+            $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+
+            echo '<script>alert("Предмет успешно изменен");</script>'; 
+        }
+        else
+        {
+            echo '<script>alert("Введите новое значение предмета");</script>';
+        }
+    }
+}
 ?>     
