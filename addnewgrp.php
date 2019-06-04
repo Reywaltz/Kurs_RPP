@@ -17,13 +17,20 @@
     <main class="main">	
 		<form name="new_grp" method="post">
             <?php
-            addnewgrp();
-                echo'</div>
+                echo'
                     <h2>Введите название группы</h2>
                     <input class="input_grp" type="text" name = "get_grp" required><br>
-                    <input class="addButton" type = "submit" value = "Добавить группу">
-                </form>
-            </main>
+                    <input class="addButton" type = "submit" value = "Добавить группу">';
+                    addnewgrp();
+                echo'</form>';
+            echo'<form name="edit_grp" method="post">';
+            show_groups();
+            echo '<input class="editButton" type = "submit" value = "Изменить группу">';
+            echo '<h2 class = "edit_text">Выберите группу для редактирования</h2>';
+            echo '<input class = "edit_input" name = "edit_text1" type = "text">';
+            editgrp();
+            // print_r($_POST);
+            echo '</main>
             <div class = "journal">
                 <img class = "main_journal" src="src/diary_background.png" alt="jrl" width="1295px">
             </div>';

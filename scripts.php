@@ -208,14 +208,7 @@ function show_students()
 
         if(!empty($array))
         {
-            // print_r($array);
-
-            echo'<select class = "std_div_class">'; 
-            for ($i = 0; $i < count($array); $i++)
-            {
-                echo '<option value = "'.$array[$i]['std_id'].'">'.$array[$i]['name'].'</option>';
-            }
-            echo('</select>');  
+            // print_r($array); 
 
             echo '<table class = "student_table" border="1"><tbody>
                 <tr>
@@ -248,14 +241,46 @@ function addnewgrp()
         $user = 'root';
         $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
         mysqli_query($connection,"SET NAMES utf8");
-        $query = "INSERT INTO `groups` (`grp_id`, `grp_name`) VALUES (NULL, '{$_POST['get_grp']}')";
-        $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
-        echo("<script>alert(Группа успешна добавлена)</script>");
+        $query_check = "SELECT * FROM `groups` WHERE `grp_name` = '{$_POST['get_grp']}'"; 
+        $result_check = mysqli_query($connection, $query_check) or die(mysqli_error($connection));
+        while($res_check = mysqli_fetch_assoc($result_check))
+        {
+            $array[] = $res_check;
+        }
+        if(!empty($array))
+        {
+            echo '<script>alert("Такая группа уже есть");</script>';
+        }
+        else
+        { 
+            $query = "INSERT INTO `groups` (`grp_id`, `grp_name`) VALUES (NULL, '{$_POST['get_grp']}')";
+            $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+            echo '<script>alert("Группа успешно добавлена");</script>';
+        }
     }
 }
 
-function editstd()
+
+function editgrp()
 {
-    // print_r($_POST);
+    if(isset($_POST['grp_list']))
+    {
+        $host = 'localhost';
+        $database = 'test';
+        $user = 'root';
+        $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
+        mysqli_query($connection,"SET NAMES utf8");
+        $query1 = "SELECT * FROM `groups` WHERE `grp_name` = '{$_POST['grp_list']}'";
+        $result1 = mysqli_query($connection, $query1) or die(mysqli_error($connection));
+        while($res = mysqli_fetch_assoc($result1))
+        {
+            $array[] = $res;
+        }
+        $grp_id = $array[0]['grp_id'];
+        $query = "UPDATE `groups` SET `grp_name` = '{$_POST['edit_text1']}' WHERE `groups`.`grp_id` = '$grp_id'";
+        echo($query);
+        $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+        echo '<script>alert("Группа успешно изменена");</script>'; 
+    }
 }
 ?>     

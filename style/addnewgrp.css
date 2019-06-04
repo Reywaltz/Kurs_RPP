@@ -13,6 +13,10 @@ body{
 }
 
 h2{
+    position: absolute;
+    top: -110px;
+    width: 200px;
+    text-align: center;
     color: black;
 }
 
@@ -103,8 +107,8 @@ h2{
 
 .grp_list_class{
     position: absolute;
-    left: 520px;
-    top: 280px;
+    left: 590px;
+    top: -20px;
     font-family: 'Lora', serif;
     z-index: 2;
     border-radius: 10px;
@@ -137,8 +141,11 @@ h2{
 }
 
 .editButton {
+    position: absolute;
+    left: 580px;
+    top: 40px;
     font-family: 'Lora', serif;
-    width: 150px;
+    width: 200px;
     background-color: #3498DB;
     color: white;
     padding: 16px;
@@ -157,7 +164,7 @@ h2{
     position: absolute;
     font-family: 'Lora', serif;
     width: 218px;
-    top: 110px;
+    top: 70px;
     background-color: #3498DB;
     color: white;
     padding: 16px;
@@ -197,3 +204,31 @@ a.num{
     bottom: -850px;
     margin: 20px auto;
 }
+
+.input_grp
+{
+    position: absolute;
+    width: 200px;
+    font-size: 20px;
+    border-radius: 3px;
+}
+
+.edit_text
+{
+    position: absolute;
+    left: 560px;
+    width: 250px;
+    text-align: center;
+    color: black;
+}
+
+.edit_input
+{
+    position: absolute;
+    left: 830px;
+    top: -12px;
+    width: 200px;
+    border-radius: 3px;
+    font-size: 20px;
+}
+

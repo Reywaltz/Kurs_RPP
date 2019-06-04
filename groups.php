@@ -19,14 +19,14 @@
             <?php
             {
                 echo '
-                
                     <input class="showButton" type="submit" name = "get_std" value="Получить список студентов"><br>
             </main>
             <div class = "journal">
                 <img class = "main_journal" src="src/diary_background.png" alt="jrl" width="1295px">
             </div>';
                 show_groups();
-                echo'<a class="addButton" href = "addnewgrp.php">Добавить новую группу</a>';
+                echo'<a class="addButton" href = "addnewgrp.php">Добавить новую/Удалить группу</a>';
+                echo'<a class="add_us_Button" href = "addnewgrp.php">Добавить новую/Удалить учётную запись</a>';
                 echo '</form>';
                 echo '<form name="std_list" method="post">';
                 show_students();

@@ -183,7 +183,7 @@ h2{
 .addButton {
     position: absolute;
     left: 490px;
-    bottom: 600px;
+    bottom: 570px;
     font-family: 'Lora', serif;
     width: 218px;
     background-color: #3498DB;
@@ -248,4 +248,21 @@ a.num{
     left: 20%;
     font-size: 20px;
     bottom: 470px;
+}
+
+.add_us_Button
+{
+    font-family: 'Lora', serif;
+    position: absolute;
+    left: 400px;
+    top: 430px;
+    width: 400px;
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    transition-duration: 0.4s;
+    border: none;
 }
