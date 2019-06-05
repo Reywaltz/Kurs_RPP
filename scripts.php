@@ -871,11 +871,14 @@ function add_mark()
         {
             $array1[] = $res;
         }
+        $date = $_POST['date_text1'];
+        $date = date('d.m.Y', strtotime($date));
+
         $subject = $array1[0]['sub_name'];
         $teachname = $array1[0]['teach_name'];
         // echo($_SESSION['id']);
         // print_r($array1);
-        $query = "INSERT INTO `sessions` (`sub_name`, `grade`, `date`, `teach_name`, `ses_type`, `u_id`, `sem_id`) VALUES ('{$subject}', '{$_POST['grade_text']}', '{$_POST['date_text1']}', '{$teachname}', '{$_POST['type_text']}', '{$_POST['usid_text1']}', '{$_POST['sem_text']}')";
+        $query = "INSERT INTO `sessions` (`sub_name`, `grade`, `date`, `teach_name`, `ses_type`, `u_id`, `sem_id`) VALUES ('{$subject}', '{$_POST['grade_text']}', '{$date}', '{$teachname}', '{$_POST['type_text']}', '{$_POST['usid_text1']}', '{$_POST['sem_text']}')";
         // $query3 = "INSERT INTO `sessions` (`ses_id`, `sub_name`, `grade`, `date`, `teach_name`, `ses_type`, `u_id`, `sem_id`) VALUES (NULL, 'Мат. Анализ', '5', '21.12.2001', 'Григорьев В.Н.', 'Экзамен', '72OH72', '3')";
         // echo($query);
         // echo($query3);
