@@ -1,0 +1,580 @@
+@import url('https://fonts.googleapis.com/css?family=Lora&display=swap');
+
+body{ 
+    background-image: url("../src/background.png");
+}
+
+.menu{
+    margin: 0 auto;
+    width: 70%;
+    background: linear-gradient(to right, rgba(110, 46, 170, 0.925) 0%, white 50%, rgba(110, 46, 170, 0.925) 100%);
+    text-align: center;
+    font-family: 'Lora', serif;
+}
+
+h2{
+    position: absolute;
+    top: -110px;
+    width: 200px;
+    text-align: center;
+    color: black;
+}
+
+.button#exit_b {
+    font-family: 'Lora', serif;
+    width: 250px;
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    border: none;
+}
+
+.button#exit_bhover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    background-color: #4CAF50;
+    color: white;
+}
+
+.nav{
+    padding-top: 12px;
+}
+
+.nav a{
+    -webkit-transition: 0.4s ease; /* Safari and Chrome */
+    -moz-transition: 0.4s ease; /* Firefox 4 */
+    -o-transition: 0.4s ease; /* Opera */
+    text-decoration: none;
+    font-family: 'Lora', serif;
+    background-color: #3498DB;
+    color: white;
+    font-size: 30px;
+    border-radius: 10px;
+} 
+
+.nav a:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    border: none;
+}
+
+.triange{
+    border: 20px solid transparent;
+    border-right: 20px solid #d4c8b1;
+    margin-top: -40px;
+}
+
+.standardButton {
+    font-family: 'Lora', serif;
+    width: 250px;
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    border: none;
+}
+
+.standardButton:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    background-color: #4CAF50;
+    color: white;
+}
+
+.usr_pic{
+    position: absolute;
+    left: 1100px;
+    top: 80px;
+    border-radius: 50%;
+}
+
+.journal{
+    position: absolute;
+    top: -112px;
+    left: -150px;
+    /* margin: 0 auto; */
+    z-index: 0;
+}
+
+.main{
+    position: absolute;
+    left: 16%;
+    top: 310px;
+    z-index: 1;
+}
+
+.grp_list_class{
+    position: absolute;
+    left: 590px;
+    top: -20px;
+    font-family: 'Lora', serif;
+    z-index: 2;
+    border-radius: 10px;
+    font-size: 30px;
+}
+
+.showButton {
+    position: absolute;
+    top: 335px;
+    left: 490px;
+    font-family: 'Lora', serif;
+    width: 250px;
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    border: none;
+}
+
+.showButton:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    background-color: #4CAF50;
+    color: white;
+}
+
+.editButton {
+    position: absolute;
+    left: 580px;
+    top: 40px;
+    font-family: 'Lora', serif;
+    width: 200px;
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    border: none;
+}
+
+.editButton:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    background-color: #4CAF50;
+    color: white;
+}
+
+.addButton {
+    position: absolute;
+    font-family: 'Lora', serif;
+    width: 218px;
+    top: 70px;
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    text-align: center;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    border: none;
+}
+
+.addButton:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+.page_num{
+    color: red;
+    z-index: 99;
+}
+
+a.num{
+    color: red;
+    z-index: 2;
+    position: relative;
+    left: 1230px;
+    bottom: -850px;
+    margin: 20px auto;
+}
+
+.input_grp
+{
+    position: absolute;
+    width: 200px;
+    font-size: 20px;
+    border-radius: 3px;
+}
+
+.edit_text
+{
+    position: absolute;
+    left: 560px;
+    width: 250px;
+    text-align: center;
+    color: black;
+}
+
+.edit_input
+{
+    position: absolute;
+    left: 830px;
+    top: -12px;
+    width: 200px;
+    border-radius: 3px;
+    font-size: 20px;
+}
+
+.del_Button
+{
+    position: absolute;
+    font-family: 'Lora', serif;
+    width: 218px;
+    left: 830px;
+    top: 40px;
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    text-align: center;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    border: none;
+}
+
+.del_Button:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    background-color: #4CAF50;
+    color: white;
+}
+
+.adduser
+{
+    position: absolute;
+    font-family: 'Lora', serif;
+    width: 218px;
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    text-align: center;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    border: none;
+}
+
+.inp_fields
+{
+    display: inline-block;
+    position: absolute;
+    left: 230px;
+    z-index: 1;
+}
+
+.log_text, .pass_text, .role_text
+{
+    width: 230px;
+}
+
+.delus_Button
+{
+    position: absolute;
+    font-family: 'Lora', serif;
+    width: 350px;
+    top: 297px;
+    left: 200px;
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    text-align: center;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    border: none;
+}
+
+.delus_Button:hover
+{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    background-color: #4CAF50;
+    color: white;
+}
+
+.student_table
+{
+    position: absolute;
+    left: 760px;
+    top: 0px;
+    font-family: 'Lora', serif;
+    text-align: center;
+    border-collapse: collapse;
+    table-layout: auto;
+    width: 600px;
+}
+
+.id_text{
+    position: absolute;
+    top: 300px;
+    left: 150px;
+    height: 50px;
+    font-size: 20px;
+    z-index: 3;
+}
+
+.add_subject
+{
+    position: absolute;
+    font-family: 'Lora', serif;
+    width: 200px;
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    text-align: center;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    border: none;
+}
+
+.add_subject:hover
+{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    background-color: #4CAF50;
+    color: white;
+}
+
+.sub_text
+{
+    border-radius: 3px;
+}
+
+.del_subject
+{
+    position: absolute;
+    font-family: 'Lora', serif;
+    width: 360px;
+    left: 170px;
+    top: 290px;
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    text-align: center;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    border: none;
+}
+
+.del_subject:hover
+{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    background-color: #4CAF50;
+    color: white;
+}
+
+.edit_subject
+{
+    position: absolute;
+    font-family: 'Lora', serif;
+    width: 360px;
+    left: 170px;
+    top: 210px;
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    text-align: center;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    border: none;
+}
+
+.edit_subject:hover
+{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    background-color: #4CAF50;
+    color: white;
+}
+
+.subid_text
+{
+    position: absolute;
+    left: 70px;
+    top: 102px;
+    font-size: 20px;
+    z-index: 3;
+}
+
+.edituser
+{
+    position: absolute;
+    font-family: 'Lora', serif;
+    width: 250px;
+    left: -150px;
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    text-align: center;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    border: none;
+}
+
+.edituser:hover
+{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+.subid_text
+{
+    position: absolute;
+    left: -72px;
+    top: -10px;
+    width: 250px;
+    font-size: 20px;
+}
+
+.name_text
+{
+    position: absolute;
+    left: -70px;
+    top: -90px;
+    font-size: 20px;
+}
+
+.delteach
+{
+    position: absolute;
+    font-family: 'Lora', serif;
+    width: 250px;
+    left: 110px;
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    text-align: center;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    border: none;
+}
+
+.delteach:hover
+{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    background-color: #4CAF50;
+    color: white;
+}
+
+.date_text
+{
+    position: absolute;
+    font-family: 'Lora', serif;
+    width: 250px;
+    left: -170px;
+    top: 10px;   
+}
+
+.sem
+{
+    position: absolute;
+    z-index: 5;
+    font-family: 'Lora', 'serif';
+    font-size: 40px;
+    top: 100px;
+    left: 20px;
+}
+
+.grade
+{
+    position: absolute;
+    z-index: 4;
+    top: 93px;
+    left: -170px;
+}
+
+.type
+{
+    position: absolute;
+    z-index: 5;
+    top: 130px;
+    left: -170px;
+}
+
+.usid_text
+{
+    position: absolute;
+    left: 10px;
+    width: 260px;
+    font-size: 20px;
+}
+
+.add
+{
+    position: absolute;
+    font-family: 'Lora', serif;
+    width: 250px;
+    left: 0px;
+    top: 180px;
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    text-align: center;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    border: none;
+}
+
+.add:hover
+{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    background-color: #4CAF50;
+    color: white;
+}
+
+.text
+{
+    position: absolute;
+    top: -65px;
+    left: -40px;
+    z-index: 5;
+    font-family: 'Lora', serif;   
+}
+
+.date_choice
+{
+    position: absolute;
+    top: 61px;
+    left: 2px;
+}
+
+.sem_choice
+{
+    position: absolute;
+    font-size: 20px;
+    top: 105px;
+    left: 40px;
+}
+
+.grade_choice
+{
+    position: absolute;
+    top: 142px;
+    left: 2px;
+}
+
+.type_choice
+{
+    position: absolute;
+    top: 182px;
+    left: 2px;
+    text-align: left;
+}
+
+.num
+{
+    position: absolute;
+    left: 900px;
+    width: 300px;
+    top: -10px;
+    z-index: 4;
+}
+

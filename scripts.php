@@ -101,30 +101,27 @@ function get_main_page()
     }
     elseif($res['role'] == 'student')
     {
-        print_r($_SESSION);
-        echo '</br>';
         $query = "SELECT * FROM students WHERE ('{$_SESSION['id']}' = std_id)";
         $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
         $res = mysqli_fetch_assoc($result);
-        print_r($res);
         echo '<div class="menu">
         <div class="nav">
-            <a href="\admin/semesters/allSemesters.php">Семестры</a>
+            <a href="showstudses.php">Общие результаты</a>
             <a href="\admin/semesters/allSemesters.php">Академические задолжности</a>
         </div>
         <div class="welcome">
-            <p><b>Личный кабинет: '; echo($res['name']); echo('<img src ="'.$res['img'].'"width="100" height="100"><br>');
+            <p>Личный кабинет: '; echo($res['name']);
             echo '	
-            <p><b>Учебная группа: '; echo($res['grp_name']);
+            <p>Учебная группа: '; echo($res['grp_name']);
             echo ' 
             <form class="exit_b" action="" method="POST">
                 <input class="standardButton" type="submit" name="exit" value="ВЫЙТИ">
-            </form>';   
+            </form></div>';   
     }
     else{
-        print_r($_SESSION);
-        // echo '<script>alert()</script>';
-        // header('Location:index.php');
+        // print_r($_SESSION);
+        echo '<script>alert("Вы не авторизация");</script>';
+        header('Location:index.php');
         }
 }
 
@@ -883,6 +880,57 @@ function add_mark()
         // print_r($_POST);
         $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
         // header("Location: addmark.php");
+    }
+}
+
+function showstudsession()
+{
+    if(isset($_POST['show_ses_stud']))
+    {
+        $host = 'localhost';
+        $database = 'test';
+        $user = 'root';
+        $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
+        mysqli_query($connection,"SET NAMES utf8");
+        $query1 = "SELECT * FROM `students` WHERE `std_id` = '{$_SESSION['id']}'";
+        $result1 = mysqli_query($connection, $query1) or die(mysqli_error($connection));
+        while($res = mysqli_fetch_assoc($result1))
+        {
+            $array[] = $res;
+        }
+        $studu_id = $array[0]['u_id'];
+        $query = "SELECT * FROM `sessions` WHERE `u_id` = '{$studu_id}' and `sem_id` = '{$_POST['sem_text']}'";
+        $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+        // print_r($_POST);
+        while($res = mysqli_fetch_assoc($result))
+        {
+            $array1[] = $res;
+        }
+        if(!empty($array1))
+        {
+            // print_r($array); 
+            echo '<table class = "student_table" border="1"><tbody>
+                <tr>
+                    <th>Наименование дисциплинцы</th>
+                    <th>Оценка</th>
+                    <th>Дата</th>
+                    <th>Имя преподавателя</th>
+                    <th>Тип экзамена</th>
+                    <th>Номер студ. билета</th>
+                </tr>					
+                </tbody>';
+            for ($i = 0; $i < count($array1); $i++)
+            {                                                                                                                                                                                                                            
+                echo '<tr>'.'<td>'.$array1[$i]['sub_name'].'</td>'.'<td>'.$array1[$i]['grade'].'</td>'.'<td>'.$array1[$i]['date'].'</td>'.'<td>'.$array1[$i]['teach_name'].'</td>'.'<td>'.$array1[$i]['ses_type'].'</td>'.'<td>'.$array1[$i]['u_id'].'</td>'.'</tr>';
+            }
+            echo("</table");
+        }
+        else
+        {
+            echo('<div class = num>');
+            echo('<p>В данной группе пока нет студентов</p>');
+            echo('</div>');
+        }
     }
 }
 ?>     
