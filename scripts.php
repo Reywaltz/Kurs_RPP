@@ -72,7 +72,7 @@ function get_main_page()
                     <a href="groups.php">Группы</a>
                     <a href="addnewteacher.php">Преподаватели</a>
                     <a href="subject.php">Предметы</a>
-                    <a href="\admin/students/chooseBranch.php">Студенты</a>
+                    <a href="addstudent.php">Студенты</a>
                     <a href="\admin/marks/chooseGroupAndSubject.php">Оценки</a>
                 </div>
                 <div class="welcome">
@@ -674,6 +674,116 @@ function delteacher()
 
     }
 }
+
+function showstudent()
+{
+    $host = 'localhost';
+    $database = 'test';
+    $user = 'root';
+    $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
+    mysqli_query($connection,"SET NAMES utf8");
+    $query = "SELECT * FROM `students` ORDER BY `students`.`std_id` ASC";
+    $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+    // print_r($_POST);
+    while($res = mysqli_fetch_assoc($result))
+    {
+        $array[] = $res;
+    }
+    if(!empty($array))
+    {
+        // print_r($array); 
+
+        echo '<table class = "student_table" border="1"><tbody>
+            <tr>
+                <th>ID</th>
+                <th>Имя</th>
+                <th>Группа</th>
+                <th>Номер студ. билета</th>
+            </tr>					
+            </tbody>';
+        for ($i = 0; $i < count($array); $i++)
+        {                                                                                                                                                                                                                            
+            echo '<tr>'.'<td>'.$array[$i]['std_id'].'</td>'.'<td>'.$array[$i]['name'].'</td>'.'<td>'.$array[$i]['grp_name'].'</td>'.'<td>'.$array[$i]['u_id'].'</td>';
+            
+        }
+        echo("</table");
+    }
+}
+
+function getstudid()
+{
+    $host = 'localhost';
+    $database = 'test';
+    $user = 'root';
+    $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
+    mysqli_query($connection,"SET NAMES utf8");
+    $query = "SELECT * FROM `users` where `role` = 'student'";
+    $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+    while($res = mysqli_fetch_assoc($result))
+    {
+        $array[] = $res;
+    }
+    // print_r($array);
+    echo '<select class="usid_text" name = "usid_text1">';
+    for ($i = 0; $i < count($array); $i++)
+    {                                                                                                                                                                                                                            
+        echo '<option value ="'.$array[$i]['id'].'">'.$array[$i]['id'].'</option>';
+    }
+    echo '</select>';
+}
+
+function getstudgrp()
+{
+    $host = 'localhost';
+    $database = 'test';
+    $user = 'root';
+    $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
+    mysqli_query($connection,"SET NAMES utf8");
+    $query1 = "SELECT * FROM `groups` ORDER BY `groups`.`grp_name` ASC";
+    $result1 = mysqli_query($connection, $query1) or die(mysqli_error($connection));
+    while($res = mysqli_fetch_assoc($result1))
+    {
+        $array[] = $res;
+    }
+    if(!empty($array))
+    {	
+        echo '<select class="subid_text" name = "subid_text1">';
+       
+        for ($i = 0; $i < count($array); $i++)
+        {                                                                                                                                                                                                                            
+            echo '<option value ="'.$array[$i]['grp_name'].'">'.$array[$i]['grp_name'].'</option>';
+        }
+        echo '</select>';
+    }
+}
+
+function editstudent()
+{
+if(isset($_POST['add_user1']))
+    {
+        $host = 'localhost';
+        $database = 'test';
+        $user = 'root';
+        $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
+        mysqli_query($connection,"SET NAMES utf8");
+        $query = "UPDATE `students` SET `name` = '{$_POST['name_text1']}', `grp_name` = '{$_POST['subid_text1']}', `u_id` = '{$_POST['name_text2']}' WHERE `students`.`std_id` = '{$_POST['usid_text1']}'";
+        $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+        header('Location: addstudent.php');
+    }
+}
+
+function delstudent()
+{
+    if(isset($_POST['del_teach1']))
+    {
+        $host = 'localhost';
+        $database = 'test';
+        $user = 'root';
+        $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
+        mysqli_query($connection,"SET NAMES utf8");
+        $query = "DELETE FROM `students` WHERE `std_id` = '{$_POST['usid_text1']}'";
+        $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+
+    }
+}
 ?>     
-
-
