@@ -91,8 +91,6 @@ function get_main_page()
         echo '<div class="menu">
                 <div class="nav">
                     <a href="addmark.php">Проставить оценку</a>
-                    <a href="\admin/students/chooseBranch.php">Студенты</a>
-                    <a href="\admin/semesters/allSemesters.php">Семестры</a>
                 </div>
                 <div class="welcome">
                     <p>Личный кабинет: '; echo($res['teach_name']); echo('<br>'); echo($res['sub_name']);

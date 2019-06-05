@@ -528,3 +528,42 @@ a.num{
     background-color: #4CAF50;
     color: white;
 }
+
+.text
+{
+    position: absolute;
+    top: -65px;
+    left: -40px;
+    z-index: 5;
+    font-family: 'Lora', serif;   
+}
+
+.date_choice
+{
+    position: absolute;
+    top: 61px;
+    left: 2px;
+}
+
+.sem_choice
+{
+    position: absolute;
+    top: 105px;
+    left: 2px;
+}
+
+.grade_choice
+{
+    position: absolute;
+    top: 142px;
+    left: 2px;
+}
+
+.type_choice
+{
+    position: absolute;
+    top: 182px;
+    left: 2px;
+    text-align: left;
+}
+

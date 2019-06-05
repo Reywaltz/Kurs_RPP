@@ -29,19 +29,15 @@
                 echo '<select class="grade" name = "grade_text"><option value="Незачёт">Незачёт</option><option value = "Зачёт">Зачёт</option><option value="2">2</option><option value = "3">3</option><option value="4">4</option><option value ="5">5</option></select>';
                 echo '<select class="type" name = "type_text"><option value="Зачёт">Зачёт</option><option value ="Экзамен">Экзамен</select>';
                 add_mark();
-                
-                // getstudgrp();
-                // delstudent();
                 echo '<input class="add" type = "submit" name = "add_ses" value = "Внести данные об сессии">';
                 echo'</div>';
-                // editstudent();
-                // print_r($_SESSION);
-                // print_r($_POST);
-                echo '</form>';
-                
-
-                // echo '<input class="name2_text" placeholder="ФИО преподавателя" name = "name_text2" type="text" required><br><br>';
-                // echo '<input class = "delus_Button" name = "delus_but" type = "submit" value = "Удалить учётную запись c данным id">';;
+                echo '<div class = "text">';
+                echo '<p class = "name_choice">Студент</p>';
+                echo '<p class = "date_choice">Дата</p>';
+                echo '<p class = "sem_choice">Семестр</p>';
+                echo '<p class = "grade_choice">Оценка</p>';
+                echo '<p class = "type_choice">Тип экзамена</p>';
+                echo'</div>';
                 echo '</form>';
                 showsession();
                 // delus();
