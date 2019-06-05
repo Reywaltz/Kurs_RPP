@@ -85,14 +85,12 @@ function get_main_page()
     }
     elseif($res['role'] == 'teacher')
     {
-        print_r($_SESSION);
-        echo '</br>';
         $query = "SELECT * FROM teachers WHERE ('{$_SESSION['id']}' = teach_id)";
         $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
         $res = mysqli_fetch_assoc($result);
         echo '<div class="menu">
                 <div class="nav">
-                    <a href="\admin/groups/allGroups.php">Группы</a>
+                    <a href="addmark.php">Проставить оценку</a>
                     <a href="\admin/students/chooseBranch.php">Студенты</a>
                     <a href="\admin/semesters/allSemesters.php">Семестры</a>
                 </div>
@@ -257,7 +255,6 @@ function addnewgrp()
         }
     }
 }
-
 
 function editgrp()
 {
@@ -784,6 +781,41 @@ function delstudent()
         $query = "DELETE FROM `students` WHERE `std_id` = '{$_POST['usid_text1']}'";
         $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
 
+    }
+}
+
+function showsession()
+{
+    $host = 'localhost';
+    $database = 'test';
+    $user = 'root';
+    $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
+    mysqli_query($connection,"SET NAMES utf8");
+    $query = "SELECT * FROM `students` ORDER BY `students`.`std_id` ASC";
+    $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+    // print_r($_POST);
+    while($res = mysqli_fetch_assoc($result))
+    {
+        $array[] = $res;
+    }
+    if(!empty($array))
+    {
+        // print_r($array); 
+
+        echo '<table class = "student_table" border="1"><tbody>
+            <tr>
+                <th>ID</th>
+                <th>Имя</th>
+                <th>Группа</th>
+                <th>Номер студ. билета</th>
+            </tr>					
+            </tbody>';
+        for ($i = 0; $i < count($array); $i++)
+        {                                                                                                                                                                                                                            
+            echo '<tr>'.'<td>'.$array[$i]['std_id'].'</td>'.'<td>'.$array[$i]['name'].'</td>'.'<td>'.$array[$i]['grp_name'].'</td>'.'<td>'.$array[$i]['u_id'].'</td>';
+            
+        }
+        echo("</table");
     }
 }
 ?>     
