@@ -23,10 +23,10 @@ function log_in()
             $_SESSION['id'] = $res['id'];
             $_SESSION['login'] = $res['login'];
             $_SESSION['password'] = $res['password'];
-            $_SESSION['img'] = $res['img'];
-            $_SESSION['name'] = $res['name'];
+            // $_SESSION['img'] = $res['img'];
+            // $_SESSION['name'] = $res['name'];
             // $_SESSION['grp'] = $res['grp'];
-            $_SESSION['role'] = $res['role'];
+            // $_SESSION['role'] = $res['role'];
             // $_SESSION['otd'] = $res['otd'];
             $_SESSION['check'] = true;
             print_r($_SESSION);
@@ -715,17 +715,16 @@ function getstudid()
     $user = 'root';
     $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
     mysqli_query($connection,"SET NAMES utf8");
-    $query = "SELECT * FROM `users` where `role` = 'student'";
+    $query = "SELECT * FROM `students`";
     $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
     while($res = mysqli_fetch_assoc($result))
     {
         $array[] = $res;
     }
-    // print_r($array);
     echo '<select class="usid_text" name = "usid_text1">';
     for ($i = 0; $i < count($array); $i++)
     {                                                                                                                                                                                                                            
-        echo '<option value ="'.$array[$i]['id'].'">'.$array[$i]['id'].'</option>';
+        echo '<option value ="'.$array[$i]['u_id'].'">'.$array[$i]['name'].'</option>';
     }
     echo '</select>';
 }
@@ -821,6 +820,7 @@ function showsession()
     {
         $array[] = $res;
     }
+    print_r($res);
     $teach_name = $array[0]['teach_name'];
     $query = "SELECT * FROM `sessions` WHERE `teach_name` = '{$teach_name}'";
     $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
@@ -853,6 +853,35 @@ function showsession()
             
         }
         echo("</table");
+    }
+}
+
+function add_mark()
+{
+    if(isset($_POST['add_ses']))
+    {
+        $host = 'localhost';
+        $database = 'test';
+        $user = 'root';
+        $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
+        mysqli_query($connection,"SET NAMES utf8");
+        $query1 = "SELECT * FROM `teachers` WHERE `teach_id` = '{$_SESSION['id']}'";
+        $result1 = mysqli_query($connection, $query1) or die(mysqli_error($connection));
+        while($res = mysqli_fetch_assoc($result1))
+        {
+            $array1[] = $res;
+        }
+        $subject = $array1[0]['sub_name'];
+        $teachname = $array1[0]['teach_name'];
+        // echo($_SESSION['id']);
+        // print_r($array1);
+        $query = "INSERT INTO `sessions` (`sub_name`, `grade`, `date`, `teach_name`, `ses_type`, `u_id`, `sem_id`) VALUES ('{$subject}', '{$_POST['grade_text']}', '{$_POST['date_text1']}', '{$teachname}', '{$_POST['type_text']}', '{$_POST['usid_text1']}', '{$_POST['sem_text']}')";
+        // $query3 = "INSERT INTO `sessions` (`ses_id`, `sub_name`, `grade`, `date`, `teach_name`, `ses_type`, `u_id`, `sem_id`) VALUES (NULL, 'Мат. Анализ', '5', '21.12.2001', 'Григорьев В.Н.', 'Экзамен', '72OH72', '3')";
+        // echo($query);
+        // echo($query3);
+        // print_r($_POST);
+        $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+        // header("Location: addmark.php");
     }
 }
 ?>     

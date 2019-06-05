@@ -23,15 +23,20 @@
                 echo '<img class = "main_journal" src="src/diary_background.png" alt="jrl" width="1595px">';
                 echo '</div>';
                 echo '<div class = "inp_fields">';
-                echo '<input class="name_text" placeholder="ФИО студента" name = "name_text1" type="text" required><br><br>';
-                echo '<input class="name_text1" placeholder="Номер студ. билета" name = "name_text2" type="text" required><br><br>';
                 getstudid();
-                getstudgrp();
-                delstudent();
-                echo '<input class="edituser" type = "submit" name = "add_user1" value = "Изменить данные учителя">';
-                echo '<input class="delteach" name = "del_teach1" type="submit" value = "Удалить преподавателя по id" required><br><br>';
+                echo '<input class="date_text" placeholder="Дата экзамена" name = "date_text1" type="date" required><br><br>';
+                echo '<select class="sem" name = "sem_text"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select>';
+                echo '<select class="grade" name = "grade_text"><option value="Незачёт">Незачёт</option><option value = "Зачёт">Зачёт</option><option value="2">2</option><option value = "3">3</option><option value="4">4</option><option value ="5">5</option></select>';
+                echo '<select class="type" name = "type_text"><option value="Зачёт">Зачёт</option><option value ="Экзамен">Экзамен</select>';
+                add_mark();
+                
+                // getstudgrp();
+                // delstudent();
+                echo '<input class="add" type = "submit" name = "add_ses" value = "Внести данные об сессии">';
                 echo'</div>';
-                editstudent();
+                // editstudent();
+                // print_r($_SESSION);
+                // print_r($_POST);
                 echo '</form>';
                 
 
