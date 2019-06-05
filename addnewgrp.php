@@ -28,7 +28,6 @@
             echo '<input class="editButton" type = "submit" value = "Изменить группу">';
             echo '<h2 class = "edit_text">Выберите группу для редактирования</h2>';
             echo '<input class = "edit_input" name = "edit_text1" type = "text">';
-            echo '<input class = "edit_Button" name = "edit_but" type = "submit" value = "Изменнить данные">';
             editgrp();
             delgrp();
             echo'</form>';

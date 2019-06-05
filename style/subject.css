@@ -213,10 +213,12 @@ a.num{
 .edit_text
 {
     position: absolute;
-    left: 560px;
+    left: 230px;
+    top: 170px;
     width: 250px;
     text-align: center;
     color: black;
+    z-index: 4;
 }
 
 .edit_input
@@ -404,7 +406,7 @@ a.num{
 {
     position: absolute;
     left: 100px;
-    top: 292px;
+    top: 252px;
     font-size: 40px;
     z-index: 3;
 }

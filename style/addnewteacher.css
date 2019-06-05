@@ -414,7 +414,7 @@ a.num{
     position: absolute;
     font-family: 'Lora', serif;
     width: 250px;
-    left: -70px;
+    left: -150px;
     background-color: #3498DB;
     color: white;
     padding: 16px;
@@ -455,4 +455,27 @@ a.num{
     left: -70px;
     top: -52px;
     font-size: 20px;
+}
+
+.delteach
+{
+    position: absolute;
+    font-family: 'Lora', serif;
+    width: 250px;
+    left: 110px;
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    text-align: center;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    border: none;
+}
+
+.delteach:hover
+{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    background-color: #4CAF50;
+    color: white;
 }

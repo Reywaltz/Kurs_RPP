@@ -25,12 +25,9 @@
                 echo '<h2>Напишите название нового предмета</h2>';
                 echo '<input class="sub_text" placeholder="Название предмета" name = "sub_text1" type="text" required><br><br>';
                 echo '<input class="add_subject" type = "submit" name = "add_subject1" value = "Добавить предмет" required>';
-                
-                
+              
                 echo'</div>';
-                
-                
-                
+
                 echo '</form>';
                 echo '<form name="grp_text" method="post">';
                 echo '<input class = "edit_text" name = "edit_text1" type = "text">';
@@ -41,7 +38,6 @@
                 editsubject();
                 addsubject();
                 show_subject();
-                // print_r($_POST);
                 echo '</form>';
                 
                 echo '</main>';

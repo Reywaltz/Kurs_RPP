@@ -26,12 +26,15 @@
                 echo '<input class="name_text" placeholder="ФИО преподавателя" name = "name_text1" type="text" required><br><br>';
                 getteachsub();
                 getteachid();
+                delteacher();
                 echo '<input class="edituser" type = "submit" name = "add_user1" value = "Изменить данные учителя">';
+                echo '<input class="delteach" name = "del_teach1" type="submit" value = "Удалить преподавателя по id" required><br><br>';
                 echo'</div>';
                 editteacher();
                 echo '</form>';
                 
-                echo '<form name="add_user" method="post">';
+
+                // echo '<input class="name2_text" placeholder="ФИО преподавателя" name = "name_text2" type="text" required><br><br>';
                 // echo '<input class = "delus_Button" name = "delus_but" type = "submit" value = "Удалить учётную запись c данным id">';;
                 echo '</form>';
                 showteacher();

@@ -343,8 +343,8 @@ function delus()
         $user = 'root';
         $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
         mysqli_query($connection,"SET NAMES utf8");
+        // print_r($_POST);
         $query = "DELETE FROM `users` WHERE `id` = '{$_POST['id_text1']}'";
-        echo($query);
         $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
         header('Location: addnewus.php');
     }
@@ -501,7 +501,7 @@ function delsubjects()
         $user = 'root';
         $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
         mysqli_query($connection,"SET NAMES utf8");
-        $query = "DELETE FROM `subjects` WHERE `sub_name` = '{$_POST['sub_text1']}'";
+        $query = "DELETE FROM `subjects` WHERE `sub_id` = '{$_POST['subid_text1']}'";
         $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
         header('Location: subject.php');
     }
@@ -523,6 +523,7 @@ function getsubid()
     if(!empty($array))
     {	
         echo '<select class="subid_text" name = "subid_text1">';
+       
         for ($i = 0; $i < count($array); $i++)
         {                                                                                                                                                                                                                            
             echo '<option value ="'.$array[$i]['sub_id'].'">'.$array[$i]['sub_id'].'</option>';
@@ -613,12 +614,13 @@ function getteachid()
     {
         $array[] = $res;
     }
+    // print_r($array);
     echo '<select class="usid_text" name = "usid_text1">';
     for ($i = 0; $i < count($array); $i++)
     {                                                                                                                                                                                                                            
         echo '<option value ="'.$array[$i]['id'].'">'.$array[$i]['id'].'</option>';
     }
-        echo '</select>';
+    echo '</select>';
 }
 
 function getteachsub()
@@ -635,32 +637,42 @@ function getteachsub()
         $array[] = $res;
     }
     echo '<select class="subid_text" name = "subid_text1">';
+    echo '<option value ="NULL">Без предмета</option>';
     for ($i = 0; $i < count($array); $i++)
     {                                                                                                                                                                                                                            
         echo '<option value ="'.$array[$i]['sub_name'].'">'.$array[$i]['sub_name'].'</option>';
     }
         echo '</select>';
-    }
+}
 
 function editteacher()
 {
     if(isset($_POST['add_user1']))
     {
-            print_r($_POST);
-            $host = 'localhost';
-            $database = 'test';
-            $user = 'root';
-            $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
-            mysqli_query($connection,"SET NAMES utf8");
-            $query = "UPDATE `teachers` SET `teach_name` = '{$_POST['name_text1']}', `sub_name` = '{$_POST['subid_text1']}' WHERE `teachers`.`teach_id` = '{$_POST['usid_text1']}'";
-            $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
-            header('Location: addnewteacher.php');
+        $host = 'localhost';
+        $database = 'test';
+        $user = 'root';
+        $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
+        mysqli_query($connection,"SET NAMES utf8");
+        $query = "UPDATE `teachers` SET `teach_name` = '{$_POST['name_text1']}', `sub_name` = '{$_POST['subid_text1']}' WHERE `teachers`.`teach_id` = '{$_POST['usid_text1']}'";
+        $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+        header('Location: addnewteacher.php');
     }
 }
 
-function addteacher()
+function delteacher()
 {
+    if(isset($_POST['del_teach1']))
+    {
+        $host = 'localhost';
+        $database = 'test';
+        $user = 'root';
+        $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
+        mysqli_query($connection,"SET NAMES utf8");
+        $query = "DELETE FROM `users` WHERE `id` = '{$_POST['usid_text1']}'";
+        $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
 
+    }
 }
 ?>     
 
