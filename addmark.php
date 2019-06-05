@@ -4,7 +4,7 @@
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <meta http-equiv="X-UA-Compatible" content="ie=edge">
-            <link rel="stylesheet" href="style/addstudent.css">
+            <link rel="stylesheet" href="style/addmark.css">
             <title>Домашняя страница</title>
         </head>
 <body>   
@@ -20,7 +20,7 @@
             {   
                 include_once('scripts.php');
                 echo '<div class = "journal">';
-                echo '<img class = "main_journal" src="src/diary_background.png" alt="jrl" width="1295px">';
+                echo '<img class = "main_journal" src="src/diary_background.png" alt="jrl" width="1595px">';
                 echo '</div>';
                 echo '<div class = "inp_fields">';
                 echo '<input class="name_text" placeholder="ФИО студента" name = "name_text1" type="text" required><br><br>';
@@ -38,7 +38,7 @@
                 // echo '<input class="name2_text" placeholder="ФИО преподавателя" name = "name_text2" type="text" required><br><br>';
                 // echo '<input class = "delus_Button" name = "delus_but" type = "submit" value = "Удалить учётную запись c данным id">';;
                 echo '</form>';
-                showstudent();
+                showsession();
                 // delus();
                 
             }

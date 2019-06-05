@@ -24,9 +24,9 @@ function log_in()
             $_SESSION['login'] = $res['login'];
             $_SESSION['password'] = $res['password'];
             $_SESSION['img'] = $res['img'];
-            // $_SESSION['name'] = $res['name'];
+            $_SESSION['name'] = $res['name'];
             // $_SESSION['grp'] = $res['grp'];
-            // $_SESSION['role'] = $res['role'];
+            $_SESSION['role'] = $res['role'];
             // $_SESSION['otd'] = $res['otd'];
             $_SESSION['check'] = true;
             print_r($_SESSION);
@@ -95,7 +95,7 @@ function get_main_page()
                     <a href="\admin/semesters/allSemesters.php">Семестры</a>
                 </div>
                 <div class="welcome">
-                    <p><b>Личный кабинет: '; echo($res['teach_name']); echo('<br>'); echo($res['sub_name']);
+                    <p>Личный кабинет: '; echo($res['teach_name']); echo('<br>'); echo($res['sub_name']);
                     echo '	
                     <form class="exit_b" action="" method="POST">
                         <input class="standardButton" type="submit" name="exit" value="ВЫЙТИ">
@@ -318,11 +318,12 @@ function addus()
         {
             $array[] = $res;
         }
+        // print_r($_POST);
         if(empty($array))
         {
             $query1 = "INSERT INTO `users` (`id`, `login`, `password`, `role`) VALUES ('NULL', '{$_POST['log_text1']}', '{$_POST['pass_text1']}', '{$_POST['role_text1']}')";
             $result = mysqli_query($connection, $query1) or die(mysqli_error($connection));
-            echo '<script>alert("Учётная запись добавлена");</script>';
+        echo '<script>alert("Учётная запись добавлена");</script>';
         }
         else
         {
@@ -763,9 +764,32 @@ if(isset($_POST['add_user1']))
         $user = 'root';
         $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
         mysqli_query($connection,"SET NAMES utf8");
-        $query = "UPDATE `students` SET `name` = '{$_POST['name_text1']}', `grp_name` = '{$_POST['subid_text1']}', `u_id` = '{$_POST['name_text2']}' WHERE `students`.`std_id` = '{$_POST['usid_text1']}'";
-        $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
-        header('Location: addstudent.php');
+        $query1 = "SELECT * FROM `students` ORDER BY `std_id` ASC";
+        $result1 = mysqli_query($connection, $query1) or die(mysqli_error($connection));
+        while($res = mysqli_fetch_assoc($result1))
+        {
+            $array[] = $res;
+        }
+        $query2 = "SELECT `std_id` FROM `students` WHERE `std_id` = '{$_POST['usid_text1']}'";
+        $result2 = mysqli_query($connection, $query2) or die(mysqli_error($connection));
+        while($res = mysqli_fetch_assoc($result2))
+        {
+            $array1[] = $res;
+        }
+        // print_r($array);
+        // print_r($array1);
+        if(!empty($array1))
+        {
+            $query = "UPDATE `students` SET `name` = '{$_POST['name_text1']}', `grp_name` = '{$_POST['subid_text1']}', `u_id` = '{$_POST['name_text2']}' WHERE `students`.`std_id` = '{$_POST['usid_text1']}'";
+            $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+            header('Location: addstudent.php');
+        }
+        else
+        {
+            $query = "INSERT INTO `students` (`std_id`, `name`, `grp_name`, `u_id`) VALUES ('{$_POST['usid_text1']}', '{$_POST['name_text1']}', '{$_POST['subid_text1']}', '{$_POST['name_text2']}')";
+            $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+            header('Location: addstudent.php');
+        }
     }
 }
 
@@ -791,28 +815,41 @@ function showsession()
     $user = 'root';
     $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
     mysqli_query($connection,"SET NAMES utf8");
-    $query = "SELECT * FROM `students` ORDER BY `students`.`std_id` ASC";
+    $query1 = "SELECT * FROM `teachers` WHERE `teach_id` = '{$_SESSION['id']}'";
+    $result1 = mysqli_query($connection, $query1) or die(mysqli_error($connection));
+    while($res = mysqli_fetch_assoc($result1))
+    {
+        $array[] = $res;
+    }
+    $teach_name = $array[0]['teach_name'];
+    $query = "SELECT * FROM `sessions` WHERE `teach_name` = '{$teach_name}'";
     $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
     // print_r($_POST);
     while($res = mysqli_fetch_assoc($result))
     {
-        $array[] = $res;
+        $array1[] = $res;
     }
-    if(!empty($array))
+    // print_r($_SESSION);
+    // print_r($array1);
+    // echo($array1[0]['sub_name']);
+    if(!empty($array1))
     {
         // print_r($array); 
 
         echo '<table class = "student_table" border="1"><tbody>
             <tr>
-                <th>ID</th>
-                <th>Имя</th>
-                <th>Группа</th>
+                <th>Наименование дисциплинцы</th>
+                <th>Оценка</th>
+                <th>Дата</th>
+                <th>Имя преподавателя</th>
+                <th>Тип экзамена</th>
                 <th>Номер студ. билета</th>
+                <th>Номер семестра</th>
             </tr>					
             </tbody>';
-        for ($i = 0; $i < count($array); $i++)
+        for ($i = 0; $i < count($array1); $i++)
         {                                                                                                                                                                                                                            
-            echo '<tr>'.'<td>'.$array[$i]['std_id'].'</td>'.'<td>'.$array[$i]['name'].'</td>'.'<td>'.$array[$i]['grp_name'].'</td>'.'<td>'.$array[$i]['u_id'].'</td>';
+            echo '<tr>'.'<td>'.$array1[$i]['sub_name'].'</td>'.'<td>'.$array1[$i]['grade'].'</td>'.'<td>'.$array1[$i]['date'].'</td>'.'<td>'.$array1[$i]['teach_name'].'</td>'.'<td>'.$array1[$i]['ses_type'].'</td>'.'<td>'.$array1[$i]['u_id'].'</td>'.'<td>'.$array1[$i]['sem_id'].'</td>'.'</tr>';
             
         }
         echo("</table");

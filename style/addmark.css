@@ -93,10 +93,9 @@ h2{
 
 .journal{
     position: absolute;
-    top: -148px;
-    left: 220px;
+    top: -128px;
+    left: -150px;
     /* margin: 0 auto; */
-    left: 16%;
     z-index: 0;
 }
 
@@ -178,15 +177,6 @@ h2{
     color: white;
 }
 
-.student_table{
-    position: absolute;
-    left: 1000px;
-    font-family: 'Lora', serif;
-    text-align: center;
-    border-collapse: collapse;
-    table-layout: auto;
-    width: 150px;
-}
 
 .page_num{
     color: red;
@@ -307,8 +297,8 @@ a.num{
 .student_table
 {
     position: absolute;
-    left: 700px;
-    top: -100px;
+    left: 730px;
+    top: -80px;
     font-family: 'Lora', serif;
     text-align: center;
     border-collapse: collapse;
