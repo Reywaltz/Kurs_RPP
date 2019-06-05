@@ -107,7 +107,7 @@ function get_main_page()
         echo '<div class="menu">
         <div class="nav">
             <a href="showstudses.php">Общие результаты</a>
-            <a href="\admin/semesters/allSemesters.php">Академические задолжности</a>
+            <a href="academicdebt.php">Академические задолжности</a>
         </div>
         <div class="welcome">
             <p>Личный кабинет: '; echo($res['name']);
@@ -883,7 +883,7 @@ function add_mark()
     }
 }
 
-function showstudsession()
+function showdebts()
 {
     if(isset($_POST['show_ses_stud']))
     {
@@ -899,7 +899,7 @@ function showstudsession()
             $array[] = $res;
         }
         $studu_id = $array[0]['u_id'];
-        $query = "SELECT * FROM `sessions` WHERE `u_id` = '{$studu_id}' and `sem_id` = '{$_POST['sem_text']}'";
+        $query = "SELECT * FROM `sessions` WHERE `u_id` = '{$studu_id}' and `sem_id` = '{$_POST['sem_text']}' and (`grade` = '2' OR `grade` = 'Незачёт')";
         $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
         // print_r($_POST);
         while($res = mysqli_fetch_assoc($result))
@@ -928,7 +928,7 @@ function showstudsession()
         else
         {
             echo('<div class = num>');
-            echo('<p>В данной группе пока нет студентов</p>');
+            echo('<p>Задолжностей нет</p>');
             echo('</div>');
         }
     }
