@@ -23,18 +23,14 @@ function log_in()
             $_SESSION['id'] = $res['id'];
             $_SESSION['login'] = $res['login'];
             $_SESSION['password'] = $res['password'];
-            // $_SESSION['img'] = $res['img'];
-            // $_SESSION['name'] = $res['name'];
-            // $_SESSION['grp'] = $res['grp'];
-            // $_SESSION['role'] = $res['role'];
-            // $_SESSION['otd'] = $res['otd'];
+            $_SESSION['role'] = $res['role'];
             $_SESSION['check'] = true;
             print_r($_SESSION);
             header('Location: main_page.php');
         }
         else
         {
-            echo('Error');
+            echo '<srcipt>alert("Неправильный логин или пароль");</alert>';
         }
     }
 
@@ -72,8 +68,7 @@ function get_main_page()
                     <a href="groups.php">Группы</a>
                     <a href="addnewteacher.php">Преподаватели</a>
                     <a href="subject.php">Предметы</a>
-                    <a href="addstudent.php">Студенты</a>
-                    <a href="\admin/marks/chooseGroupAndSubject.php">Оценки</a>
+                    <a href="delsession.php">Сессии</a>
                 </div>
                 <div class="welcome">
                     <p>Личный кабинет: '; echo("Администратор"); 
@@ -119,7 +114,7 @@ function get_main_page()
             </form></div>';   
     }
     else{
-        // print_r($_SESSION);
+        
         echo '<script>alert("Вы не авторизация");</script>';
         header('Location:index.php');
         }
@@ -318,7 +313,7 @@ function addus()
         {
             $query1 = "INSERT INTO `users` (`id`, `login`, `password`, `role`) VALUES ('NULL', '{$_POST['log_text1']}', '{$_POST['pass_text1']}', '{$_POST['role_text1']}')";
             $result = mysqli_query($connection, $query1) or die(mysqli_error($connection));
-        echo '<script>alert("Учётная запись добавлена");</script>';
+            echo '<script>alert("Учётная запись добавлена");</script>';
         }
         else
         {
@@ -337,9 +332,16 @@ function delus()
         $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
         mysqli_query($connection,"SET NAMES utf8");
         // print_r($_POST);
-        $query = "DELETE FROM `users` WHERE `id` = '{$_POST['id_text1']}'";
-        $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
-        header('Location: addnewus.php');
+        if($_SESSION['id'] != $_POST['id_text1'])
+        {
+            $query = "DELETE FROM `users` WHERE `id` = '{$_POST['id_text1']}'";
+            $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+            header('Location: addnewus.php');
+        }
+        else
+        {
+            echo "<script>alert('Нельзя удалить самого себя');</script>";
+        }
     }
 }
 
@@ -437,6 +439,7 @@ function addsubject()
             $query1 = "INSERT INTO `subjects`(`sub_id`, `sub_name`) VALUES ('NULL', '{$_POST['sub_text1']}')";
             $result = mysqli_query($connection, $query1) or die(mysqli_error($connection));
             echo '<script>alert("Предмет добавлен");</script>';
+            header('Location:subject.php');
         }
         else
         {
@@ -764,23 +767,15 @@ if(isset($_POST['add_user1']))
         {
             $array[] = $res;
         }
-        $query2 = "SELECT `std_id` FROM `students` WHERE `std_id` = '{$_POST['usid_text1']}'";
-        $result2 = mysqli_query($connection, $query2) or die(mysqli_error($connection));
-        while($res = mysqli_fetch_assoc($result2))
-        {
-            $array1[] = $res;
-        }
-        // print_r($array);
-        // print_r($array1);
         if(!empty($array1))
         {
-            $query = "UPDATE `students` SET `name` = '{$_POST['name_text1']}', `grp_name` = '{$_POST['subid_text1']}', `u_id` = '{$_POST['name_text2']}' WHERE `students`.`std_id` = '{$_POST['usid_text1']}'";
+            $query = "UPDATE `students` SET `name` = '{$_POST['name_text1']}', `grp_name` = '{$_POST['subid_text1']}', `u_id` = '{$_POST['name_text2']}' WHERE `std_id` = '{$_POST['usid_text1']}'";
             $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
             header('Location: addstudent.php');
         }
         else
         {
-            $query = "INSERT INTO `students` (`std_id`, `name`, `grp_name`, `u_id`) VALUES ('{$_POST['usid_text1']}', '{$_POST['name_text1']}', '{$_POST['subid_text1']}', '{$_POST['name_text2']}')";
+            $query = "INSERT INTO `students` (`name`, `grp_name`, `u_id`) VALUES ('{$_POST['name_text1']}', '{$_POST['subid_text1']}', '{$_POST['name_text2']}')";
             $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
             header('Location: addstudent.php');
         }
@@ -871,15 +866,11 @@ function add_mark()
 
         $subject = $array1[0]['sub_name'];
         $teachname = $array1[0]['teach_name'];
-        // echo($_SESSION['id']);
-        // print_r($array1);
+
         $query = "INSERT INTO `sessions` (`sub_name`, `grade`, `date`, `teach_name`, `ses_type`, `u_id`, `sem_id`) VALUES ('{$subject}', '{$_POST['grade_text']}', '{$date}', '{$teachname}', '{$_POST['type_text']}', '{$_POST['usid_text1']}', '{$_POST['sem_text']}')";
-        // $query3 = "INSERT INTO `sessions` (`ses_id`, `sub_name`, `grade`, `date`, `teach_name`, `ses_type`, `u_id`, `sem_id`) VALUES (NULL, 'Мат. Анализ', '5', '21.12.2001', 'Григорьев В.Н.', 'Экзамен', '72OH72', '3')";
-        // echo($query);
-        // echo($query3);
-        // print_r($_POST);
+    
         $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
-        // header("Location: addmark.php");
+        header("Location: addmark.php");
     }
 }
 
@@ -931,6 +922,136 @@ function showdebts()
             echo('<p>Задолжностей нет</p>');
             echo('</div>');
         }
+    }
+}
+
+function showstudsession()
+{
+    if(isset($_POST['show_ses_stud']))
+    {
+        $host = 'localhost';
+        $database = 'test';
+        $user = 'root';
+        $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
+        mysqli_query($connection,"SET NAMES utf8");
+        $query1 = "SELECT * FROM `students` WHERE `std_id` = '{$_SESSION['id']}'";
+        $result1 = mysqli_query($connection, $query1) or die(mysqli_error($connection));
+        while($res = mysqli_fetch_assoc($result1))
+        {
+            $array[] = $res;
+        }
+        $studu_id = $array[0]['u_id'];
+        $query = "SELECT * FROM `sessions` WHERE `u_id` = '{$studu_id}' and `sem_id` = '{$_POST['sem_text']}'";
+        $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+        // print_r($_POST);
+        while($res = mysqli_fetch_assoc($result))
+        {
+            $array1[] = $res;
+        }
+        if(!empty($array1))
+        {
+            // print_r($array); 
+            echo '<table class = "student_table" border="1"><tbody>
+                <tr>
+                    <th>Наименование дисциплинцы</th>
+                    <th>Оценка</th>
+                    <th>Дата</th>
+                    <th>Имя преподавателя</th>
+                    <th>Тип экзамена</th>
+                    <th>Номер студ. билета</th>
+                </tr>					
+                </tbody>';
+            for ($i = 0; $i < count($array1); $i++)
+            {                                                                                                                                                                                                                            
+                echo '<tr>'.'<td>'.$array1[$i]['sub_name'].'</td>'.'<td>'.$array1[$i]['grade'].'</td>'.'<td>'.$array1[$i]['date'].'</td>'.'<td>'.$array1[$i]['teach_name'].'</td>'.'<td>'.$array1[$i]['ses_type'].'</td>'.'<td>'.$array1[$i]['u_id'].'</td>'.'</tr>';
+            }
+            echo("</table");
+        }
+        else
+        {
+            echo('<div class = num>');
+            echo('<p>Сданных сессий за это время пока нет</p>');
+            echo('</div>');
+        }
+    }
+}
+
+
+function showsessionadm()
+{
+    $host = 'localhost';
+    $database = 'test';
+    $user = 'root';
+    $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
+    mysqli_query($connection,"SET NAMES utf8");
+    $query = "SELECT * FROM `sessions`";
+    $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+    while($res = mysqli_fetch_assoc($result))
+    {
+        $array1[] = $res;
+    }
+    if(!empty($array1))
+    {
+        echo '<table class = "student_table" border="1"><tbody>
+            <tr>
+                <th>ID</th>
+                <th>Наименование дисциплинцы</th>
+                <th>Оценка</th>
+                <th>Дата</th>
+                <th>Имя преподавателя</th>
+                <th>Тип экзамена</th>
+                <th>Номер студ. билета</th>
+                <th>Номер семестра</th>
+            </tr>					
+            </tbody>';
+        for ($i = 0; $i < count($array1); $i++)
+        {                                                                                                                                                                                                                            
+            echo '<tr>'.'<td>'.$array1[$i]['ses_id'].'</td>'.'<td>'.$array1[$i]['sub_name'].'</td>'.'<td>'.$array1[$i]['grade'].'</td>'.'<td>'.$array1[$i]['date'].'</td>'.'<td>'.$array1[$i]['teach_name'].'</td>'.'<td>'.$array1[$i]['ses_type'].'</td>'.'<td>'.$array1[$i]['u_id'].'</td>'.'<td>'.$array1[$i]['sem_id'].'</td>'.'</tr>';
+            
+        }
+        echo("</table");
+    }
+    else
+    {
+        echo('<div class = num>');
+        echo('<p>Сданных сессий за это время пока нет</p>');
+        echo('</div>');
+    }
+}
+
+function showsessionlist()
+{
+    $host = 'localhost';
+    $database = 'test';
+    $user = 'root';
+    $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
+    mysqli_query($connection,"SET NAMES utf8");
+    $query = "SELECT * FROM `sessions`";
+    $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+    while($res = mysqli_fetch_assoc($result))
+    {
+        $array[] = $res;
+    }
+    echo '<select class="usid_text" name = "usid_text1">';
+    for ($i = 0; $i < count($array); $i++)
+    {                                                                                                                                                                                                                            
+        echo '<option value ="'.$array[$i]['ses_id'].'">'.$array[$i]['ses_id'].'</option>';
+    }
+    echo '</select>';
+}
+
+function delsession()
+{
+    if(isset($_POST['del_sess']))
+    {    
+        $host = 'localhost';
+        $database = 'test';
+        $user = 'root';
+        $connection = mysqli_connect($host, $user, "", $database) or die(mysqli_error($link));
+        mysqli_query($connection,"SET NAMES utf8");
+        $query = "DELETE FROM `sessions` WHERE `ses_id` = '{$_POST['usid_text1']}'";
+        $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+        header('Location:delsession.php');
     }
 }
 ?>     

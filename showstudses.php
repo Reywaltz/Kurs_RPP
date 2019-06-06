@@ -22,21 +22,12 @@
                 echo '<div class = "journal">';
                 echo '<img class = "main_journal" src="src/diary_background.png" alt="jrl" width="1595px">';
                 echo '</div>';
-                // getstudid();
                 echo '<select class="sem" name = "sem_text"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select>';
-                // add_mark();
                 echo '<input class="add" type = "submit" name = "show_ses_stud" value = "Показать результаты сессии">';
-                // print_r($_POST);
                 echo '<div class = "text">';
-                // echo '<p class = "name_choice">Студент</p>';
-                // echo '<p class = "date_choice">Дата</p>';
                 echo '<p class = "sem_choice">Семестр</p>';
-                // echo '<p class = "grade_choice">Оценка</p>';
-                // echo '<p class = "type_choice">Тип экзамена</p>';
-                // echo'</div>';
                 echo '</form>';
                 showstudsession();
-                // delus();
                 
             }
             ?>

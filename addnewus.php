@@ -32,9 +32,10 @@
                 echo '<form name="id_text" method="post">';
                 echo '<input class = "delus_Button" name = "delus_but" type = "submit" value = "Удалить учётную запись c данным id">';
                 addus();
+                delus();
                 show_us_list();
                 show_us();
-                delus();
+                
                 echo '</form>';
             }
             ?>
