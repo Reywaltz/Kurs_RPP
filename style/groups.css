@@ -183,7 +183,7 @@ h2{
 .addButton {
     position: absolute;
     left: 490px;
-    bottom: 570px;
+    top: 330px;
     font-family: 'Lora', serif;
     width: 218px;
     background-color: #3498DB;
